@@ -57,6 +57,14 @@
     NSLog(@"Unsupported SDK. GoogleMobileAds SDK version 7.12.0 or higher is required.");
     return nil;
   }
+    if (@available(iOS 8, *)) {
+        // iOS 8 (or newer)
+        NSLog(@"Facebook Adapter iOS 8+, welcome!");
+    } else {
+        // iOS < 8
+        NSLog(@"Facebook Adapter iOS <8, sorry!");
+        return nil;
+    }
   self = [self init];
   if (self) {
     _bannerAd = [[GADFBBannerAd alloc] initWithGADMAdNetworkConnector:connector adapter:self];
