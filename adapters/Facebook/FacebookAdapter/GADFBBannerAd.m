@@ -69,6 +69,14 @@ static FBAdSize GADFBAdSizeFromAdSize(GADAdSize gadAdSize, NSError *__autoreleas
                                        adapter:(id<GADMAdNetworkAdapter>)adapter {
   self = [super init];
   if (self) {
+      if (@available(iOS 8, *)) {
+          // iOS 8 (or newer)
+          NSLog(@"Facebook Adapter iOS 8+, welcome!");
+      } else {
+          // iOS < 8
+          NSLog(@"Facebook Adapter iOS <8, sorry!");
+          return nil;
+      }
     _adapter = adapter;
     _connector = connector;
 
