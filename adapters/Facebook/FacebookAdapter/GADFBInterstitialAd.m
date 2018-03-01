@@ -39,6 +39,14 @@
 
 - (instancetype)initWithGADMAdNetworkConnector:(id<GADMAdNetworkConnector>)connector
                                        adapter:(id<GADMAdNetworkAdapter>)adapter {
+    if (@available(iOS 8, *)) {
+        // iOS 8 (or newer)
+        NSLog(@"Facebook Adapter iOS 8+, welcome!");
+    } else {
+        // iOS < 8
+        NSLog(@"Facebook Adapter iOS <8, sorry!");
+        return nil;
+    }
   self = [super init];
   if (self) {
     _adapter = adapter;

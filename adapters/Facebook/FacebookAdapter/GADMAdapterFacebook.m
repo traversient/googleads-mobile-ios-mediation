@@ -53,10 +53,6 @@
 }
 
 - (instancetype)initWithGADMAdNetworkConnector:(id<GADMAdNetworkConnector>)connector {
-  if (![[GADMobileAds sharedInstance] isSDKVersionAtLeastMajor:7 minor:12 patch:0]) {
-    NSLog(@"Unsupported SDK. GoogleMobileAds SDK version 7.12.0 or higher is required.");
-    return nil;
-  }
     if (@available(iOS 8, *)) {
         // iOS 8 (or newer)
         NSLog(@"Facebook Adapter iOS 8+, welcome!");
@@ -65,6 +61,10 @@
         NSLog(@"Facebook Adapter iOS <8, sorry!");
         return nil;
     }
+  if (![[GADMobileAds sharedInstance] isSDKVersionAtLeastMajor:7 minor:12 patch:0]) {
+    NSLog(@"Unsupported SDK. GoogleMobileAds SDK version 7.12.0 or higher is required.");
+    return nil;
+  }
   self = [self init];
   if (self) {
     _bannerAd = [[GADFBBannerAd alloc] initWithGADMAdNetworkConnector:connector adapter:self];
@@ -131,6 +131,14 @@
 /// connector.
 - (instancetype)initWithRewardBasedVideoAdNetworkConnector:
         (id<GADMRewardBasedVideoAdNetworkConnector>)connector {
+    if (@available(iOS 8, *)) {
+        // iOS 8 (or newer)
+        NSLog(@"Facebook Adapter iOS 8+, welcome!");
+    } else {
+        // iOS < 8
+        NSLog(@"Facebook Adapter iOS <8, sorry!");
+        return nil;
+    }
   if (!connector) {
     return nil;
   }
